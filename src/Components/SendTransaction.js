@@ -62,7 +62,7 @@ class sendTransaction extends React.Component {
 
         return (
             <>
-                <button onClick={this.placeBet.bind(this)} />
+                <button onClick={this.placeBet.bind(this)}> Spin </button>
             </>
         );
     }
