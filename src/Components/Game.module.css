@@ -1,0 +1,13 @@
+
+.spinnercontainer {
+    overflow: hidden;
+    height: 632px;  
+    padding: 2em;
+    transform: translate(-50%, -50%) scale(.62, .62);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: flex;
+    transition: 0.3s transform;
+  }
+  
