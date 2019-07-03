@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/styles';
 
-import { Route, Link, BrowserRouter as Router } from 'react-router-dom'
+import { Route, Link, HashRouter } from 'react-router-dom'
 import App from './pages/App';
 import Login from './pages/Login';
 
@@ -14,12 +14,12 @@ ReactDOM.render(
   <ThemeProvider theme={theme}>
     {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
     <CssBaseline />
-    <Router>
+    <HashRouter basename='/'>
     <div>
-      <Route exact={true} path="/" component={App} />
+      <Route path="/" component={App} />
       <Route path="/login" component={Login} />
     </div>
-  </Router>
+  </HashRouter>
   </ThemeProvider>,
   document.querySelector('#root'),
 )
