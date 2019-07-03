@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/credits-slots/static/css/main.b8cd683c.chunk.css",
-    "main.js": "/credits-slots/static/js/main.a6fe7a68.chunk.js",
-    "main.js.map": "/credits-slots/static/js/main.a6fe7a68.chunk.js.map",
+    "main.js": "/credits-slots/static/js/main.1b82d18b.chunk.js",
+    "main.js.map": "/credits-slots/static/js/main.1b82d18b.chunk.js.map",
     "runtime~main.js": "/credits-slots/static/js/runtime~main.ce8f83cb.js",
     "runtime~main.js.map": "/credits-slots/static/js/runtime~main.ce8f83cb.js.map",
-    "static/js/2.4552cfa9.chunk.js": "/credits-slots/static/js/2.4552cfa9.chunk.js",
-    "static/js/2.4552cfa9.chunk.js.map": "/credits-slots/static/js/2.4552cfa9.chunk.js.map",
+    "static/js/2.506d00a6.chunk.js": "/credits-slots/static/js/2.506d00a6.chunk.js",
+    "static/js/2.506d00a6.chunk.js.map": "/credits-slots/static/js/2.506d00a6.chunk.js.map",
     "index.html": "/credits-slots/index.html",
-    "precache-manifest.a5d00b466aa7f278b97b1a69f499acb1.js": "/credits-slots/precache-manifest.a5d00b466aa7f278b97b1a69f499acb1.js",
+    "precache-manifest.f5a676fe023646db8575787e81b8c990.js": "/credits-slots/precache-manifest.f5a676fe023646db8575787e81b8c990.js",
     "service-worker.js": "/credits-slots/service-worker.js",
     "static/css/main.b8cd683c.chunk.css.map": "/credits-slots/static/css/main.b8cd683c.chunk.css.map"
   }
