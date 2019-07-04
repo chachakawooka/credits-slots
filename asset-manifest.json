@@ -1,15 +1,17 @@
 {
   "files": {
-    "main.css": "/credits-slots/static/css/main.b8cd683c.chunk.css",
-    "main.js": "/credits-slots/static/js/main.1b82d18b.chunk.js",
-    "main.js.map": "/credits-slots/static/js/main.1b82d18b.chunk.js.map",
+    "main.css": "/credits-slots/static/css/main.d609455c.chunk.css",
+    "main.js": "/credits-slots/static/js/main.5756c9ed.chunk.js",
+    "main.js.map": "/credits-slots/static/js/main.5756c9ed.chunk.js.map",
     "runtime~main.js": "/credits-slots/static/js/runtime~main.ce8f83cb.js",
     "runtime~main.js.map": "/credits-slots/static/js/runtime~main.ce8f83cb.js.map",
-    "static/js/2.506d00a6.chunk.js": "/credits-slots/static/js/2.506d00a6.chunk.js",
-    "static/js/2.506d00a6.chunk.js.map": "/credits-slots/static/js/2.506d00a6.chunk.js.map",
+    "static/js/2.622fe6d3.chunk.js": "/credits-slots/static/js/2.622fe6d3.chunk.js",
+    "static/js/2.622fe6d3.chunk.js.map": "/credits-slots/static/js/2.622fe6d3.chunk.js.map",
     "index.html": "/credits-slots/index.html",
-    "precache-manifest.f5a676fe023646db8575787e81b8c990.js": "/credits-slots/precache-manifest.f5a676fe023646db8575787e81b8c990.js",
+    "precache-manifest.46cbe63ca3998f7f78fa2d5ac41f8884.js": "/credits-slots/precache-manifest.46cbe63ca3998f7f78fa2d5ac41f8884.js",
     "service-worker.js": "/credits-slots/service-worker.js",
-    "static/css/main.b8cd683c.chunk.css.map": "/credits-slots/static/css/main.b8cd683c.chunk.css.map"
+    "static/css/main.d609455c.chunk.css.map": "/credits-slots/static/css/main.d609455c.chunk.css.map",
+    "static/media/Spinner.module.css": "/credits-slots/static/media/reel.842c3432.png",
+    "static/media/Game.module.css": "/credits-slots/static/media/reel_overlay.4200ea52.png"
   }
 }
