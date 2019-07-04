@@ -46,6 +46,8 @@ class Game extends React.Component {
           <Spinner item={this.state.reel3} ref={(child) => { this._child3 = child; }} timer="1700" />
         </div>
         <SendTransaction callback={this.result.bind(this)} />
+
+
       </>
     );
   }

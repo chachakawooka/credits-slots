@@ -43,7 +43,12 @@ public class DwSlots extends SmartContract {
      */
     public String payable(BigDecimal amount, byte[] userData) {
 
+        
+        String userDataStr = new String(userData, StandardCharsets.UTF_8);
         Response response;
+        JsonParser jsonParser = new JsonParser();
+        JsonObject jObject = jsonParser.parse(userDataStr).getAsJsonObject();
+        int gameHash = jObject.get("gameHash").getAsInt();
 
         List<Integer> Reels = new ArrayList<>();
         byte[] seed = getSeed();
@@ -67,7 +72,7 @@ public class DwSlots extends SmartContract {
         } else {
             resultIsSuccess = false;
         }
-        response = new Response(0, "", new Result(resultIsSuccess, Reels, win));
+        response = new Response(0, "", new Result(gameHash, resultIsSuccess, Reels, win));
 
         String res = response.toJson();
         result.put(initiator, res);
@@ -113,11 +118,13 @@ public class DwSlots extends SmartContract {
     }
 
     static class Result implements Serializable {
+        private int gameHash;
         private boolean resultIsSuccess;
         private List<Integer> Reels;
         private double win;
 
-        public Result(boolean resultIsSuccess, List<Integer> Reels, double win) {
+        public Result(int gameHash, boolean resultIsSuccess, List<Integer> Reels, double win) {
+            this.gameHash = gameHash;
             this.resultIsSuccess = resultIsSuccess;
             this.Reels = Reels;
             this.win = win;

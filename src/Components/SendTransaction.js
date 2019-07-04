@@ -9,19 +9,26 @@ class sendTransaction extends React.Component {
         this.state = {
             balance: {
                 integral: 0,
-                fraction: 0
+                fraction: 0,
+                result: null
             }
         }
     }
 
     placeBet() {
+        const gameHash = Math.random().toString().slice(10);
+
+        this.setState({
+            gameHash: gameHash
+        })
 
         let jsonr = JSON.stringify({
+            gameHash: gameHash
         })
 
 
         this.sendTransaction({
-            Target: "CiFFcwTzemsG6msVfBy2vSpPA8rLVA1VUGSuLcAJSh1h",
+            Target: "C3qmJpadn5WrAt2WrE5GwAVqGYcXX6qYGPRuGVET6cQH",
             Fee: "0.1",
             Amount: 1,
             UserData: jsonr
@@ -35,16 +42,33 @@ class sendTransaction extends React.Component {
     getResult() {
 
         this.sendTransaction({
-            Target: "CiFFcwTzemsG6msVfBy2vSpPA8rLVA1VUGSuLcAJSh1h",
+            Target: "C3qmJpadn5WrAt2WrE5GwAVqGYcXX6qYGPRuGVET6cQH",
             Fee: "0.01",
             SmartContract: {
                 Method: "getResult",
                 NewState: true
             }
         },
-            this.props.callback.bind(this)
+            this.checkResult.bind(this)
         )
 
+    }
+
+    checkResult(r){
+        console.log(r);
+       if(r && r.smart_contract_result.v_string){
+            const result = JSON.parse(r.smart_contract_result.v_string);
+            if(this.state.gameHash == result.result.gameHash){
+                this.props.callback(r);
+            }else{
+                setTimeout(this.getResult.bind(this),1000);
+            }
+            
+       }else{
+            setTimeout(this.getResult.bind(this),1000);
+       }
+
+        
     }
 
     sendTransaction(val,callback) {
