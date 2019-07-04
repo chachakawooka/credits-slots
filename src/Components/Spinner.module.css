@@ -1,9 +1,9 @@
 .icons { 
   display: inline-block;
-  width: 128px;
-  height: 564px;
+  width: 121px;
+  height: 360px;
   overflow: hidden;
-  background: #fff url(https://andyhoffman.codes/random-assets/img/slots/sprite5.png) repeat-y;
+  background: #fff url(../image/reel.png) repeat-y;
   will-change: backgroundPosition;
   transition: 0.3s background-position ease-in-out;
   padding: 0 80px;

@@ -4,7 +4,7 @@ import styles from './Spinner.module.css';
 
 class Spinner extends React.Component {
 
-    static iconHeight = 188;
+    static iconHeight = 120;
     multiplier = Math.floor(Math.random()*(4-1)+1);
     speed = Spinner.iconHeight * this.multiplier;
 
@@ -31,7 +31,7 @@ class Spinner extends React.Component {
             clearInterval(this.timer);
 
             this.setState({
-                position: Spinner.iconHeight * this.props.item
+                position: (Spinner.iconHeight * this.props.item)- 25
             })
 
         } else {

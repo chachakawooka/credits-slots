@@ -1,13 +1,21 @@
 
 .spinnercontainer {
     overflow: hidden;
-    height: 632px;  
-    padding: 2em;
-    transform: translate(-50%, -50%) scale(.62, .62);
+    height: 293px;
+    width:435px;
     position: absolute;
-    top: 50%;
-    left: 50%;
     display: flex;
     transition: 0.3s transform;
   }
   
+  .spinnercontainer::before{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:  url(../image/reel_overlay.png);
+    content: ''; 
+    z-index: 2;  
+    background-size:contain;
+  }
