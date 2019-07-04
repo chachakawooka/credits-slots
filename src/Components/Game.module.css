@@ -1,21 +1,68 @@
+.gridcontainer {
+  display: grid;
+  height: 100vh;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 0.5fr 1fr 1fr 1fr 0.5fr 0.5fr;
+  grid-template-areas: "Balance LOGO Win" "SLOTS SLOTS SLOTS" "SLOTS SLOTS SLOTS" "SLOTS SLOTS SLOTS" "Add Bet Remove" "SPIN SPIN SPIN";
+}
+
+.SLOTS { grid-area: SLOTS; }
+
+.Balance { grid-area: Balance;
+  background: #000;
+}
+
+.Win { grid-area: Win; 
+  background: #000;
+  text-align: center;
+}
+
+.topWrap{
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.247) 47.4%, rgba(255, 255, 255, 0) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-sizing: border-box;
+  margin:1em;
+  text-align: center;
+}
+
+.LOGO { grid-area: LOGO;
+  background: #000;
+}
+
+.SPIN { grid-area: SPIN; 
+
+}
+
+.Bet { grid-area: Bet; }
+
+.Add { grid-area: Add; }
+
+.Remove { grid-area: Remove; }
+
 
 .spinnercontainer {
-    overflow: hidden;
-    height: 293px;
-    width:435px;
-    position: relative;
-    display: flex;
-    transition: 0.3s transform;
-  }
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+  grid-template-areas: ". . .";
+  height: 100%;
+}
+
+h2{
+  font-family: Bangers;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 2em;
+  color: #F7931A;
+  margin:0px;
+}
+
+h3{
+  font-family: 'Knewave', cursive;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1.5em;
+  margin:0px;
   
-  .spinnercontainer::before{
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background:  url(../image/reel_overlay.png);
-    content: ''; 
-    z-index: 2;  
-    background-size:contain;
-  }
+  color: #FFFFFF;
+}

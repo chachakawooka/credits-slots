@@ -4,64 +4,63 @@ import styles from './Spinner.module.css';
 
 class Spinner extends React.Component {
 
-    static iconHeight = 120;
-    multiplier = Math.floor(Math.random()*(4-1)+1);
-    speed = Spinner.iconHeight * this.multiplier;
-
     constructor(props) {
         super(props);
 
         this.state = {
-            position: 0,
-            timeRemaining: this.props.timer
+            spinning: false,
+            margin: 0
         }
-        
-        this.run = this.run.bind(this);
+
+        this.spin = this.spin.bind(this);
+        this.stop = this.stop.bind(this);
     };
 
-    moveBackground() {
+
+    spin(){
         this.setState({
-            position: this.state.position - this.speed,
-            timeRemaining: this.state.timeRemaining - 100
+            spinning: true,
+            margin: 0
         })
     }
 
-    tick() {
-        if (this.state.timeRemaining <= 0) {
-            clearInterval(this.timer);
-
-            this.setState({
-                position: (Spinner.iconHeight * this.props.item)- 25
-            })
-
-        } else {
-            this.moveBackground();
-        }
+    stop(){
+        //go to selected reel
+        setTimeout(
+            this.goToReel.bind(this)
+        ,this.props.timer);
     }
 
-    run(){
+    goToReel(){
+        const margin = (this.props.item * 60) * -1;
+
         this.setState({
-            timeRemaining: this.props.timer
+            margin: margin+'%',
+            spinning: false
         })
-
-        this.timer = setInterval(() => {
-            this.tick()
-        }, 100);
-    }
-
-    componentDidMount() {
-        this.timer = setInterval(() => {
-            this.tick()
-        }, 100);
     }
 
     render() {
+        let spinClass = '';
+        if(this.state.spinning){
+            spinClass = styles.spinning
+        }
+
+
 
         return (
-            <div
-                style={{ backgroundPosition: '0px ' + this.state.position + 'px' }}
-                className={styles.icons}
-            />
+            <div className={styles.col}>
+                    <ul className={spinClass} style={{marginTop : this.state.margin}}>
+                        <li><img src={require('../image/Bitcoin.svg')} /></li>
+                        <li><img src={require('../image/credits.png')} /></li>
+                        <li><img src={require('../image/Litecoin.svg')} /></li>
+                        <li><img src={require('../image/ether.svg')} /></li>
+                        <li><img src={require('../image/Bitcoin.svg')} /></li>
+                        <li><img src={require('../image/xrp.svg')} /></li>
+                        <li><img src={require('../image/Bitcoin.svg')} /></li>
+                        <li><img src={require('../image/credits.png')} /></li>
+                    </ul>
+            </div>
         )
     }
 }

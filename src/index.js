@@ -28,19 +28,6 @@ ReactDOM.render(
 
     <HashRouter basename='/'>
 
-    <div className={classes.root}>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="Menu">
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            Credit Slots
-          </Typography>
-        </Toolbar>
-      </AppBar>
-    </div>
-
     <div>
       <Route path="/" component={App} />
       <Route path="/login" component={Login} />
