@@ -37,7 +37,6 @@ ReactDOM.render(
           <Typography variant="h6" className={classes.title}>
             Credit Slots
           </Typography>
-          <Button color="inherit">Login</Button>
         </Toolbar>
       </AppBar>
     </div>

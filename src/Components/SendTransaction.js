@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Button from '@material-ui/core/Button';
+
 class sendTransaction extends React.Component {
 
     constructor(props) {
@@ -62,7 +64,13 @@ class sendTransaction extends React.Component {
 
         return (
             <>
-                <button onClick={this.placeBet.bind(this)}> Spin </button>
+                 <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    onClick={this.placeBet.bind(this)}
+                >Bet 1 CS</Button>]
             </>
         );
     }
