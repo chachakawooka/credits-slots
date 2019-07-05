@@ -1,17 +1,21 @@
 {
   "files": {
-    "main.css": "/credits-slots/static/css/main.d609455c.chunk.css",
-    "main.js": "/credits-slots/static/js/main.5756c9ed.chunk.js",
-    "main.js.map": "/credits-slots/static/js/main.5756c9ed.chunk.js.map",
+    "main.css": "/credits-slots/static/css/main.d14e0c97.chunk.css",
+    "main.js": "/credits-slots/static/js/main.113f2e69.chunk.js",
+    "main.js.map": "/credits-slots/static/js/main.113f2e69.chunk.js.map",
     "runtime~main.js": "/credits-slots/static/js/runtime~main.ce8f83cb.js",
     "runtime~main.js.map": "/credits-slots/static/js/runtime~main.ce8f83cb.js.map",
-    "static/js/2.622fe6d3.chunk.js": "/credits-slots/static/js/2.622fe6d3.chunk.js",
-    "static/js/2.622fe6d3.chunk.js.map": "/credits-slots/static/js/2.622fe6d3.chunk.js.map",
+    "static/js/2.05df6762.chunk.js": "/credits-slots/static/js/2.05df6762.chunk.js",
+    "static/js/2.05df6762.chunk.js.map": "/credits-slots/static/js/2.05df6762.chunk.js.map",
     "index.html": "/credits-slots/index.html",
-    "precache-manifest.46cbe63ca3998f7f78fa2d5ac41f8884.js": "/credits-slots/precache-manifest.46cbe63ca3998f7f78fa2d5ac41f8884.js",
+    "precache-manifest.2693fd85c6928fc8827a36a186325c88.js": "/credits-slots/precache-manifest.2693fd85c6928fc8827a36a186325c88.js",
     "service-worker.js": "/credits-slots/service-worker.js",
-    "static/css/main.d609455c.chunk.css.map": "/credits-slots/static/css/main.d609455c.chunk.css.map",
-    "static/media/Spinner.module.css": "/credits-slots/static/media/reel.842c3432.png",
-    "static/media/Game.module.css": "/credits-slots/static/media/reel_overlay.4200ea52.png"
+    "static/css/main.d14e0c97.chunk.css.map": "/credits-slots/static/css/main.d14e0c97.chunk.css.map",
+    "static/media/Bitcoin.svg": "/credits-slots/static/media/Bitcoin.d7876d48.svg",
+    "static/media/Litecoin.svg": "/credits-slots/static/media/Litecoin.c151518b.svg",
+    "static/media/credits.png": "/credits-slots/static/media/credits.fb327aab.png",
+    "static/media/ether.svg": "/credits-slots/static/media/ether.802c6eac.svg",
+    "static/media/Game.module.css": "/credits-slots/static/media/winner2.43bbe7e1.svg",
+    "static/media/xrp.svg": "/credits-slots/static/media/xrp.026fdd6d.svg"
   }
 }
