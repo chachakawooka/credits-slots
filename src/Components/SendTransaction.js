@@ -30,7 +30,7 @@ class sendTransaction extends React.Component {
         this.sendTransaction({
             Target: "C3qmJpadn5WrAt2WrE5GwAVqGYcXX6qYGPRuGVET6cQH",
             Fee: "0.1",
-            Amount: 1,
+            Amount: this.props.bet,
             UserData: jsonr
         },
             this.getResult.bind(this)

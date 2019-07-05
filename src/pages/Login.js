@@ -15,7 +15,8 @@ import Container from '@material-ui/core/Container';
 
 import {Navigation} from 'react-router';
 
-import classes from './Login.module.css'; 
+import loginStyles from './Login.module.css'; 
+import styles from '../Components/Game.module.css'; 
 
 
 class Login extends React.Component {
@@ -56,16 +57,14 @@ class Login extends React.Component {
 
 
         return (
+
+            <div className={styles.gridcontainer}>
+            <div className={styles.SLOTS}>
+            <div className={loginStyles.loginWrap}>
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
-                <div className={classes.paper}>
-                    <Avatar className={classes.avatar}>
-                        <LockOutlinedIcon />
-                    </Avatar>
-                    <Typography component="h1" variant="h5">
-                        Sign in
-                    </Typography>
-                    <div className={classes.form} noValidate>
+                <div className={styles.paper}>
+                    <div className={styles.form} noValidate>
                         <TextField
                             variant="outlined"
                             margin="normal"
@@ -101,12 +100,12 @@ class Login extends React.Component {
                             onChange={this.nodeUrl.bind(this)}
                         />
 
-                        <Button
+<Button
                             type="submit"
                             fullWidth
                             variant="contained"
                             color="primary"
-                            className={classes.submit}
+                            className={styles.submit}
                             onClick={this.submitLogin.bind(this)}
                         >
                             Sign In
@@ -114,6 +113,28 @@ class Login extends React.Component {
                     </div>
                 </div>
             </Container>
+            </div>
+            </div>
+            <div className={styles.Balance}>
+              <div className={styles.topWrap}>
+                <h2>Balance</h2>
+                <h3>0.00</h3>
+              </div>
+            </div>
+            <div className={styles.Win}>
+              <div className={styles.topWrap}>
+                <h2>Last Win</h2>
+                <h3>0.00</h3>
+              </div>
+            </div>
+          <div className={styles.LOGO}><h1>CS<em>SLOTS</em></h1></div>
+          <div className={styles.SPIN}>
+          </div>
+          <div className={styles.Bet}>
+
+          </div>
+        </div>
+           
         );
     }
 }

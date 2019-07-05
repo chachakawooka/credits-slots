@@ -9,19 +9,24 @@ class Spinner extends React.Component {
 
         this.state = {
             spinning: false,
-            margin: 0
+            margin: 0,
+            itemHeight:0
         }
 
         this.spin = this.spin.bind(this);
         this.stop = this.stop.bind(this);
     };
 
-
-    spin(){
+    startAnimation(){
         this.setState({
             spinning: true,
             margin: 0
         })
+    }
+    spin(){
+        setTimeout(
+            this.startAnimation.bind(this)
+        ,this.props.timer);
     }
 
     stop(){
@@ -32,12 +37,17 @@ class Spinner extends React.Component {
     }
 
     goToReel(){
-        const margin = (this.props.item * 60) * -1;
+        const margin = (this.props.item * this.state.itemheight) * -1;
 
         this.setState({
-            margin: margin+'%',
+            margin: margin+'px',
             spinning: false
         })
+    }
+
+    componentDidMount() {
+        const height = document.getElementById('firstItem').clientHeight;
+        this.setState({ itemheight: height });
     }
 
     render() {
@@ -46,12 +56,10 @@ class Spinner extends React.Component {
             spinClass = styles.spinning
         }
 
-
-
         return (
             <div className={styles.col}>
                     <ul className={spinClass} style={{marginTop : this.state.margin}}>
-                        <li><img src={require('../image/Bitcoin.svg')} /></li>
+                        <li id="firstItem"><img src={require('../image/Bitcoin.svg')} /></li>
                         <li><img src={require('../image/credits.png')} /></li>
                         <li><img src={require('../image/Litecoin.svg')} /></li>
                         <li><img src={require('../image/ether.svg')} /></li>
