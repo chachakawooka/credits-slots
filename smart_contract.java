@@ -34,6 +34,44 @@ public class DwSlots extends SmartContract {
         }
     }
 
+    private int getPrize(List<Integer> Reels) {
+        // Total Combinations is 3125
+
+        if ( // 5 CS pays 1000X (1 chance) = 1000
+        Reels.get(0).intValue() == 0 && Reels.get(1).intValue() == 0 && Reels.get(2).intValue() == 0
+                && Reels.get(3).intValue() == 0 && Reels.get(4).intValue() == 0) {
+            return 1000;
+        } else if ( // 4 CS pays 200X (5 chance) == 500
+        Reels.get(0).intValue() == 0 && Reels.get(1).intValue() == 0 && Reels.get(2).intValue() == 0
+                && Reels.get(3).intValue() == 0) {
+            return 10;
+        } else if ( // 3 CS pays 5X (25 chance) = 250
+        Reels.get(0).intValue() == 0 && Reels.get(1).intValue() == 0 && Reels.get(2).intValue() == 0) {
+            return 5;
+        } else if ( // 2 CS pays 2X (125 chance) = 250
+        Reels.get(0).intValue() == 0 && Reels.get(1).intValue() == 0) {
+            return 2;
+        } else if ( // 1 CS pays 1X (625 chance) = 625
+        Reels.get(0).intValue() == 0) {
+            return 1;
+        } else if ( // ANY 5 pays 50X (4 chance) == 250
+        Reels.get(0).intValue() == Reels.get(1).intValue() && Reels.get(1).intValue() == Reels.get(2).intValue()
+                && Reels.get(2).intValue() == Reels.get(3).intValue()
+                && Reels.get(3).intValue() == Reels.get(4).intValue()) {
+
+        } else if ( // ANY 4 pays 5X (16 chance) == 80
+        Reels.get(0).intValue() == Reels.get(1).intValue() && Reels.get(1).intValue() == Reels.get(2).intValue()
+                && Reels.get(2).intValue() == Reels.get(3).intValue()
+                && Reels.get(3).intValue() == Reels.get(4).intValue()) {
+            return 5;
+        } else if ( // ANY 3 pays 1X (64 chance) == 64
+        Reels.get(0).intValue() == 0 && Reels.get(1).intValue() == 0 && Reels.get(2).intValue() == 0
+                && Reels.get(3).intValue() == 0) {
+            return 1;
+        }
+        return 0; // 106 left over as margin
+    }
+
     /**
      * payable
      * 
@@ -43,7 +81,6 @@ public class DwSlots extends SmartContract {
      */
     public String payable(BigDecimal amount, byte[] userData) {
 
-        
         String userDataStr = new String(userData, StandardCharsets.UTF_8);
         Response response;
         JsonParser jsonParser = new JsonParser();
@@ -56,22 +93,22 @@ public class DwSlots extends SmartContract {
         Reels.add(generateRandomNumber(ArrayUtils.addAll(seed, GeneralConverter.toByteArray(0))));
         Reels.add(generateRandomNumber(ArrayUtils.addAll(seed, GeneralConverter.toByteArray(1))));
         Reels.add(generateRandomNumber(ArrayUtils.addAll(seed, GeneralConverter.toByteArray(2))));
+        Reels.add(generateRandomNumber(ArrayUtils.addAll(seed, GeneralConverter.toByteArray(3))));
+        Reels.add(generateRandomNumber(ArrayUtils.addAll(seed, GeneralConverter.toByteArray(4))));
 
         boolean resultIsSuccess;
-        double win = 0;
-        double Jackpot = (numReels * numReels) - numReels;
+        int multiplier = getPrize(Reels);
 
-        if (Reels.get(0).intValue() == Reels.get(1).intValue() && Reels.get(1).intValue() == Reels.get(2).intValue()) {
-            win = amount.doubleValue() * Jackpot;
+        double win = 0;
+
+        if (multiplier > 0) {
             sendTransaction(contractAddress, initiator, win, transactionFee);
             resultIsSuccess = true;
-        } else if (Reels.get(0).intValue() == Reels.get(1).intValue()) {
-            win = amount.doubleValue(); // return bet
-            sendTransaction(contractAddress, initiator, win, transactionFee);
-            resultIsSuccess = true;
+            win = amount.doubleValue() * multiplier;
         } else {
             resultIsSuccess = false;
         }
+
         response = new Response(0, "", new Result(gameHash, resultIsSuccess, Reels, win));
 
         String res = response.toJson();

@@ -20,7 +20,9 @@ class Game extends React.Component {
     this.state = {
       reel1: 1,
       reel2: 4,
-      reel3: 2,
+      reel3: 2,  
+      reel4: 2, 
+      reel5: 2,
       lastWin: 0,
       balance: 0,
       bet: 1,
@@ -52,7 +54,9 @@ class Game extends React.Component {
   spinReels() {
     this._child1.spin();
     this._child2.spin();
-    this._child3.spin();
+    this._child3.spin();  
+    this._child4.spin();  
+    this._child5.spin();
 
     this.setState(
       {
@@ -68,6 +72,8 @@ class Game extends React.Component {
       reel1: result.result.Reels[0],
       reel2: result.result.Reels[1],
       reel3: result.result.Reels[2],
+      reel4: result.result.Reels[3],
+      reel5: result.result.Reels[4],
       lastWin: result.result.win,
       balance: 0.00
     })
@@ -75,6 +81,8 @@ class Game extends React.Component {
     this._child1.stop();
     this._child2.stop();
     this._child3.stop();
+    this._child4.stop();
+    this._child5.stop();
     this.getBalance();
 
     if(result.result.resultIsSuccess){
@@ -121,7 +129,9 @@ class Game extends React.Component {
             <div className={styles.spinnercontainer}>
               <Spinner item={this.state.reel1} ref={(child) => { this._child1 = child; }} timer="100" />
               <Spinner item={this.state.reel2} ref={(child) => { this._child2 = child; }} timer="200" />
-              <Spinner item={this.state.reel3} ref={(child) => { this._child3 = child; }} timer="400" />
+              <Spinner item={this.state.reel3} ref={(child) => { this._child3 = child; }} timer="350" />
+              <Spinner item={this.state.reel4} ref={(child) => { this._child4 = child; }} timer="400" />
+              <Spinner item={this.state.reel5} ref={(child) => { this._child5 = child; }} timer="600" />
             </div>
 
           </div>
