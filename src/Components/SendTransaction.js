@@ -28,7 +28,7 @@ class sendTransaction extends React.Component {
 
 
         this.sendTransaction({
-            Target: "Aajm2agYPHn5NtM2qYyPKtUPMWosVL9id77w2TeJkEU8",
+            Target: "B3SxYX6Q9bdtk56jqtBqbAeForAm57BvP1iY7oNDGBSY",
             Fee: "0.1",
             Amount: this.props.bet,
             UserData: jsonr
@@ -42,7 +42,7 @@ class sendTransaction extends React.Component {
     getResult() {
 
         this.sendTransaction({
-            Target: "Aajm2agYPHn5NtM2qYyPKtUPMWosVL9id77w2TeJkEU8",
+            Target: "B3SxYX6Q9bdtk56jqtBqbAeForAm57BvP1iY7oNDGBSY",
             Fee: "0.01",
             SmartContract: {
                 Method: "getResult",

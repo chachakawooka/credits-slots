@@ -41,10 +41,10 @@ public class DwSlots extends SmartContract {
         Reels.get(0).intValue() == 0 && Reels.get(1).intValue() == 0 && Reels.get(2).intValue() == 0
                 && Reels.get(3).intValue() == 0 && Reels.get(4).intValue() == 0) {
             return 1000;
-        } else if ( // 4 CS pays 200X (5 chance) == 500
+        } else if ( // 4 CS pays 100 (5 chance) == 500
         Reels.get(0).intValue() == 0 && Reels.get(1).intValue() == 0 && Reels.get(2).intValue() == 0
                 && Reels.get(3).intValue() == 0) {
-            return 10;
+            return 100;
         } else if ( // 3 CS pays 5X (25 chance) = 250
         Reels.get(0).intValue() == 0 && Reels.get(1).intValue() == 0 && Reels.get(2).intValue() == 0) {
             return 5;
