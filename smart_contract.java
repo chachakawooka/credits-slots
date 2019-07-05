@@ -65,8 +65,8 @@ public class DwSlots extends SmartContract {
                 && Reels.get(3).intValue() == Reels.get(4).intValue()) {
             return 5;
         } else if ( // ANY 3 pays 1X (64 chance) == 64
-        Reels.get(0).intValue() == 0 && Reels.get(1).intValue() == 0 && Reels.get(2).intValue() == 0
-                && Reels.get(3).intValue() == 0) {
+        Reels.get(0).intValue() == Reels.get(1).intValue() && Reels.get(1).intValue() == Reels.get(2).intValue()
+                && Reels.get(2).intValue() == Reels.get(3).intValue()) {
             return 1;
         }
         return 0; // 106 left over as margin
