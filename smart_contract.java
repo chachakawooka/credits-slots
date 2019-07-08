@@ -17,6 +17,7 @@ public class DwSlots extends SmartContract {
     private String owner;
     private double transactionFee = 0.01;
     private int numReels = 5;
+    private int numSymbols = 5;
 
     public DwSlots() {
         super();
@@ -34,42 +35,42 @@ public class DwSlots extends SmartContract {
         }
     }
 
-    private int getPrize(List<Integer> Reels) {
-        // Total Combinations is 3125
+    private double calculatePrize(List<Integer> Reels) {
+    	
+    	double totalOdds = Math.pow(numSymbols, numReels);
+    	int i = numReels;
+    	double prize = 0;
+    	
+    	
+    	//Loop Through second tier prizes;
+        	double tier1fund = totalOdds * 0.3;
+        	i = numReels;
+    		do {
+    			if(Reels.get((numReels - i) ).intValue() == Reels.get((numReels - i) + 1).intValue()) {
+        			double chances = Math.pow(numSymbols, (i - 2) ) * (numSymbols-1);
+        			prize = (tier1fund / Math.pow(2, (i-1))) / chances;	
+    			}else {
+    				break;
+    			}
 
-        if ( // 5 CS pays 1000X (1 chance) = 1000
-        Reels.get(0).intValue() == 0 && Reels.get(1).intValue() == 0 && Reels.get(2).intValue() == 0
-                && Reels.get(3).intValue() == 0 && Reels.get(4).intValue() == 0) {
-            return 1000;
-        } else if ( // 4 CS pays 100 (5 chance) == 500
-        Reels.get(0).intValue() == 0 && Reels.get(1).intValue() == 0 && Reels.get(2).intValue() == 0
-                && Reels.get(3).intValue() == 0) {
-            return 100;
-        } else if ( // 3 CS pays 5X (25 chance) = 250
-        Reels.get(0).intValue() == 0 && Reels.get(1).intValue() == 0 && Reels.get(2).intValue() == 0) {
-            return 5;
-        } else if ( // 2 CS pays 2X (125 chance) = 250
-        Reels.get(0).intValue() == 0 && Reels.get(1).intValue() == 0) {
-            return 2;
-        } else if ( // 1 CS pays 1X (625 chance) = 625
-        Reels.get(0).intValue() == 0) {
-            return 1;
-        } else if ( // ANY 5 pays 50X (4 chance) == 250
-        Reels.get(0).intValue() == Reels.get(1).intValue() && Reels.get(1).intValue() == Reels.get(2).intValue()
-                && Reels.get(2).intValue() == Reels.get(3).intValue()
-                && Reels.get(3).intValue() == Reels.get(4).intValue()) {
-
-        } else if ( // ANY 4 pays 5X (16 chance) == 80
-        Reels.get(0).intValue() == Reels.get(1).intValue() && Reels.get(1).intValue() == Reels.get(2).intValue()
-                && Reels.get(2).intValue() == Reels.get(3).intValue()
-                && Reels.get(3).intValue() == Reels.get(4).intValue()) {
-            return 5;
-        } else if ( // ANY 3 pays 1X (64 chance) == 64
-        Reels.get(0).intValue() == Reels.get(1).intValue() && Reels.get(1).intValue() == Reels.get(2).intValue()
-                && Reels.get(2).intValue() == Reels.get(3).intValue()) {
-            return 1;
-        }
-        return 0; // 106 left over as margin
+    			i--;
+    		} while (i >= 2);
+    	
+    	//Loop Through top tier prizes
+    	double tier0fund = totalOdds * 0.7;
+    	i = numReels;
+		do {
+			if(Reels.get((numReels - i)).intValue() == 0) {
+				double chances = Math.pow(numSymbols, (i-1));
+				prize = (tier0fund / Math.pow(2, i)) / chances;
+			}else {
+				break;
+			}
+			i--;
+		} while (i >= 1);
+		
+    	//
+    	return prize;
     }
 
     /**
@@ -90,14 +91,13 @@ public class DwSlots extends SmartContract {
         List<Integer> Reels = new ArrayList<>();
         byte[] seed = getSeed();
 
-        Reels.add(generateRandomNumber(ArrayUtils.addAll(seed, GeneralConverter.toByteArray(0))));
-        Reels.add(generateRandomNumber(ArrayUtils.addAll(seed, GeneralConverter.toByteArray(1))));
-        Reels.add(generateRandomNumber(ArrayUtils.addAll(seed, GeneralConverter.toByteArray(2))));
-        Reels.add(generateRandomNumber(ArrayUtils.addAll(seed, GeneralConverter.toByteArray(3))));
-        Reels.add(generateRandomNumber(ArrayUtils.addAll(seed, GeneralConverter.toByteArray(4))));
+        int i = numReels;
+        do {
+        	Reels.add(generateRandomNumber(ArrayUtils.addAll(seed, GeneralConverter.toByteArray(i))));
+        } while (i <= numReels);
 
         boolean resultIsSuccess;
-        int multiplier = getPrize(Reels);
+        double multiplier = calculatePrize(Reels);
 
         double win = 0;
 
