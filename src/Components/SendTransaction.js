@@ -63,8 +63,6 @@ class sendTransaction extends React.Component {
 
     checkResult(r) {
         if (r && r.smart_contract_result.v_string) {
-            
-        console.log(JSON.parse(r.smart_contract_result.v_string));
             const result = JSON.parse(r.smart_contract_result.v_string);
             if (this.state.gameHash == result.result.gameHash) {
                 this.props.callback(r);

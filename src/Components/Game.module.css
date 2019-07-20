@@ -1,14 +1,19 @@
 .gridcontainer {
   display: grid;
-  height: 100vh;
+  height: 90vh;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 0.5fr 1fr 1fr 1fr 0.5fr 0.5fr;
-  grid-template-areas: "Balance LOGO Win" "SLOTS SLOTS SLOTS" "SLOTS SLOTS SLOTS" "SLOTS SLOTS SLOTS" "Add Bet Remove"  "SPIN SPIN PayTable";
+  grid-template-areas: "Balance LOGO Win" "SLOTS SLOTS SLOTS" "SLOTS SLOTS SLOTS" "SLOTS SLOTS SLOTS" "Add Bet Remove"  "MakeYourOwn SPIN PayTable";
 }
 
 .SLOTS { grid-area: SLOTS; }
 
 .PayTable { grid-area: PayTable;
+  background: #000;
+  position: relative;
+}
+
+.MakeYourOwn { grid-area: MakeYourOwn;
   background: #000;
   position: relative;
 }

@@ -12,7 +12,8 @@ class PayTable extends React.Component {
       displayed: false,
       topPrizes: [],
       secondPrizes: [],
-      progressive: 10000
+      progressive: 10000,
+      reels: this.props.reels
     }
 
     this.getPrizes();
@@ -28,6 +29,8 @@ class PayTable extends React.Component {
   }
 
   getPrizes() {
+
+    this.setState({reels: this.props.reels});
 
     this.sendTransaction({
       Target: config.slotAdress,
@@ -109,6 +112,10 @@ class PayTable extends React.Component {
 
   render() {
 
+    if(this.state.reels != this.props.reels){
+      this.getPrizes();
+    }
+    
     let payGridStyles = [styles.PayTableGrid];
     if (this.state.displayed) {
       payGridStyles.push(styles.PayTableGridOpen);

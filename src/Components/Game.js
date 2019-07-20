@@ -12,6 +12,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlusSquare,faMinusSquare } from '@fortawesome/free-solid-svg-icons'
 import { style } from '@material-ui/system';
 import PayTable from './PayTable'
+import MakeYourOwn from './MakeYourOwn'
 
 class Game extends React.Component {
 
@@ -19,7 +20,6 @@ class Game extends React.Component {
     super(props);
     this._reels = [];
     this.state = {
-      reels: Array(parseInt(props.reels)).fill(0),
       lastWin: 0,
       balance: 0,
       bet: 1,
@@ -48,10 +48,10 @@ class Game extends React.Component {
     }.bind(this));
   }
 
+  
   spinReels() {
     Array.apply(0, Array(parseInt(this.props.reels))).map(function (x, index) {
       this[`spinner${index}`].spin();
-      console.log('what');
     }.bind(this));
 
     this.setState(
@@ -110,6 +110,7 @@ class Game extends React.Component {
   }
   render() {
     
+    let reels = Array(parseInt(this.props.reels)).fill(0);
     return (
       <>
 
@@ -119,7 +120,7 @@ class Game extends React.Component {
             <div className={styles.arrowLeft}></div>
             <div className={this.state.winnerClassName}></div>
             <div className={styles.spinnercontainer}>
-            {this.state.reels.map((val, index) =>
+            {reels.map((val, index) =>
               <Spinner item={val} 
               ref={(child) => { this[`spinner${index}`] = child; }}
               timer="100" symbols={this.props.symbols}/>
@@ -153,6 +154,7 @@ class Game extends React.Component {
             onPlaceBet={this.spinReels.bind(this)} 
             callback={this.result.bind(this)} />
           </div>
+          <div className={styles.MakeYourOwn}><MakeYourOwn changeGame={this.props.changeGame} /></div>
           <div className={styles.Bet}>
           <div className={styles.topWrap}>
               <h2>Bet</h2>
