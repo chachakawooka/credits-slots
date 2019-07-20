@@ -29,7 +29,7 @@ public class DwSlots extends SmartContract {
     }
     
     private int generateRandomNumber(byte[] seed, int numSymbols) {
-        Random random = new Random();
+        Random random = new Random((long) Arrays.hashCode(seed));
         return random.nextInt(numSymbols);
     }
     
@@ -129,6 +129,7 @@ public class DwSlots extends SmartContract {
         int gameHash = jObject.get("gameHash").getAsInt();
         int numSymbols = jObject.get("numSymbols").getAsInt();
         int numReels = jObject.get("numReels").getAsInt();
+        String gameMaker = jObject.get("gameMaker").getAsString();
 
         /*
          * Check the number of reals & symbols aren't zero
@@ -140,19 +141,38 @@ public class DwSlots extends SmartContract {
             return new Response(1, "numReels is 0", null).toJson();
         } 
         
+        byte[] seed = getSeed();
+        
+       
         
         /*
          * Create some reels
          */
         List<Integer> Reels = new ArrayList<>();
-        byte[] seed = getSeed();
-
-        
+ 
         int i = 1;
         do {
         	Reels.add(generateRandomNumber(ArrayUtils.addAll(seed, GeneralConverter.toByteArray(i)),numSymbols));
             i++;
         } while (i <= numReels);
+
+        /*
+         * PROGRESSIVE CHANCE
+         */
+        int progressiveRandom = generateRandomNumber(seed,10000);
+        double progressiveJackpot = getProgressiveJackpot();
+        if(progressiveJackpot > 10) {
+            double progressiveCurve = progressiveJackpot * progressiveJackpot / 10000;
+            if(progressiveCurve > progressiveRandom) {
+            	sendTransaction(contractAddress, initiator, progressiveJackpot*0.9, transactionFee); //90 % to initiator
+            	sendTransaction(contractAddress, gameMaker, progressiveJackpot*0.1, transactionFee); //10 % to game maket
+            	
+                response = new Response(0, "", new Result(gameHash, true, Reels, progressiveJackpot*0.9));
+                String res = response.toJson();
+                result.put(initiator, res);
+                return res;
+            }
+        }
 
         /*
          * Calculate Prize
@@ -178,10 +198,11 @@ public class DwSlots extends SmartContract {
     }
 
     @Getter
-    public double getProgressiveJackpot() throws DwSlotsException {
-    	double progressive = getBalance(contractAddress).doubleValue();
-    	if(progressive < 0) progressive = 0;
-    	return progressive;
+    public double getProgressiveJackpot() {
+    	double balance = getBalance(contractAddress).doubleValue();
+    	if(balance < 10) return 0;
+    	if(balance > 10000) return balance - 10000; //we try to 10k aside at all times
+    	return balance / 10; //on is 10% instead
     }
 
     public void setTransactionFee(double transactionFee) throws DwSlotsException {

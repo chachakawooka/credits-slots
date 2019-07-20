@@ -52,6 +52,16 @@
     font-size: 5vh;
     text-align: center;
 }
+.PROGRESSIVE div{
+    font-family: 'Exo', cursive;
+    color: #fff;
+    font-size: 1em;
+}
+.PROGRESSIVE span{
+    font-family: 'Exo', cursive;
+    color: #fff;
+    font-size: 0.3em; 
+}
   
   .JACKPOTSYMBOL { grid-area: JACKPOT-SYMBOL; }
   

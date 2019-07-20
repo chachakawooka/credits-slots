@@ -11,7 +11,8 @@ class PayTable extends React.Component {
     this.state = {
       displayed: false,
       topPrizes: [],
-      secondPrizes: []
+      secondPrizes: [],
+      progressive: 10000
     }
 
     this.getPrizes();
@@ -60,6 +61,22 @@ class PayTable extends React.Component {
       this.updateSecondPrizes.bind(this)
     )
 
+    this.sendTransaction({
+      Target: config.slotAdress,
+      Fee: "0.01",
+      SmartContract: {
+        Method: "getProgressiveJackpot",
+        NewState: true
+      },
+
+    },
+      this.updateProgressive.bind(this)
+    )
+
+  }
+
+  updateProgressive(r) {
+    this.setState({ progressive: r.smart_contract_result.v_double });
   }
 
   updateTopPrizes(r) {
@@ -71,6 +88,7 @@ class PayTable extends React.Component {
   }
 
   updateSecondPrizes(r) {
+    console.log(r);
     let prizes = []
     r.smart_contract_result.v_list.map(function (list) {
       prizes.push(list.v_double_box);
@@ -99,7 +117,10 @@ class PayTable extends React.Component {
       <>
         <div className={styles.PayTableButton} onClick={this.openPayTable.bind(this)}><span>Pay Table</span></div>
         <div className={payGridStyles.join(' ')} onClick={this.closePayTable.bind(this)}>
-          <div className={styles.PROGRESSIVE}>PROGRESSIVE JACKPOT</div>
+          <div className={styles.PROGRESSIVE}>PROGRESSIVE JACKPOT
+            <div>{this.state.progressive} CS <span> 10% is paid to game maker</span></div>
+            
+          </div>
           <div className={styles.JACKPOTSYMBOL}>
             <img src={this.props.symbols[0]} />
             <dl>

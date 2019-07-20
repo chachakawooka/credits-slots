@@ -24,7 +24,7 @@ class App extends React.Component {
     }
     return (
       <>
-        <Game reels={config.reels} symbols={config.symbols} />
+        <Game reels={config.reels} symbols={config.symbols} gameMaker={config.gameMaker} />
       </>
     );
   }

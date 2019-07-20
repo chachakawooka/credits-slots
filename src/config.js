@@ -1,5 +1,5 @@
 let config = {
-    slotAdress: "6wGSV34G8rk26GY1Yo2aDHcqADzG3KbuuVHtE1HUSH3x",
+    slotAdress: "FaQLJChZVyUTWoYde4dWZvhuwuteZLEGrL57kVyMaqJD",
     reels: 5,
     symbols: [
         require('./image/credits.png'),
@@ -7,7 +7,9 @@ let config = {
         require('./image/ether.svg'),
         require('./image/Bitcoin.svg'),
         require('./image/xrp.svg')
-    ]
+    ],
+    gameMaker:'G251yALHEF2ZJU38BwRNjrZfxmCkDVdvQSpURPATgT3f'
 }
 
 export default config;
+    

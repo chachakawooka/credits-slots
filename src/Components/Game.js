@@ -148,6 +148,7 @@ class Game extends React.Component {
             <SendTransaction 
             reels={this.props.reels}
             symbols={this.props.symbols.length}
+            gameMaker={this.props.gameMaker}
             bet={this.state.bet} 
             onPlaceBet={this.spinReels.bind(this)} 
             callback={this.result.bind(this)} />

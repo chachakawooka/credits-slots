@@ -20,7 +20,7 @@ class sendTransaction extends React.Component {
 
     placeBet() {
         this.props.onPlaceBet();
-        const gameHash = Math.random().toString().slice(10);
+        const gameHash = Math.random().toString().slice(8);
 
         this.setState({
             gameHash: gameHash
@@ -29,7 +29,8 @@ class sendTransaction extends React.Component {
         let jsonr = JSON.stringify({
             gameHash: gameHash,
             numSymbols: parseInt(this.props.symbols),
-            numReels: parseInt(this.props.reels)
+            numReels: parseInt(this.props.reels),
+            gameMaker: this.props.gameMaker
         })
 
 
