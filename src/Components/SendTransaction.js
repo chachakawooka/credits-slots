@@ -20,7 +20,7 @@ class sendTransaction extends React.Component {
 
     placeBet() {
         this.props.onPlaceBet();
-        const gameHash = Math.random().toString().slice(8);
+        const gameHash = Math.random().toString().slice(5);
 
         this.setState({
             gameHash: gameHash
