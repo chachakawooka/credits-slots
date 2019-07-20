@@ -23,7 +23,7 @@ class App extends React.Component {
     }
     return (
       <>
-        <Game />
+        <Game reels="5" symbols="5" />
       </>
     );
   }

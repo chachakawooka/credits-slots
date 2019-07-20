@@ -1,6 +1,8 @@
 import React from 'react';
 import styles from './SendTransaction.module.css';
 
+import config from '../config';
+
 class sendTransaction extends React.Component {
 
     constructor(props) {
@@ -9,7 +11,9 @@ class sendTransaction extends React.Component {
             balance: {
                 integral: 0,
                 fraction: 0,
-                result: null
+                result: null,
+                reels: this.props.reels,
+                symbols: this.props.symbols ? this.props.symbols : 5
             }
         }
     }
@@ -23,14 +27,16 @@ class sendTransaction extends React.Component {
         })
 
         let jsonr = JSON.stringify({
-            gameHash: gameHash
+            gameHash: gameHash,
+            numSymbols: parseInt(this.props.symbols),
+            numReels: parseInt(this.props.reels)
         })
 
 
         this.sendTransaction({
-            Target: "B3SxYX6Q9bdtk56jqtBqbAeForAm57BvP1iY7oNDGBSY",
+            Target: config.slotAdress,
             Fee: "0.1",
-            Amount: this.props.bet,
+            Amount: this.props.bet, 
             UserData: jsonr
         },
             this.getResult.bind(this)
@@ -42,7 +48,7 @@ class sendTransaction extends React.Component {
     getResult() {
 
         this.sendTransaction({
-            Target: "B3SxYX6Q9bdtk56jqtBqbAeForAm57BvP1iY7oNDGBSY",
+            Target: config.slotAdress,
             Fee: "0.01",
             SmartContract: {
                 Method: "getResult",
@@ -56,6 +62,8 @@ class sendTransaction extends React.Component {
 
     checkResult(r) {
         if (r && r.smart_contract_result.v_string) {
+            
+        console.log(JSON.parse(r.smart_contract_result.v_string));
             const result = JSON.parse(r.smart_contract_result.v_string);
             if (this.state.gameHash == result.result.gameHash) {
                 this.props.callback(r);
@@ -66,8 +74,6 @@ class sendTransaction extends React.Component {
         } else {
             setTimeout(this.getResult.bind(this), 1000);
         }
-
-
     }
 
     sendTransaction(val, callback) {

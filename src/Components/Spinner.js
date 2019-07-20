@@ -60,11 +60,11 @@ class Spinner extends React.Component {
             <div className={styles.col}>
                     <ul className={spinClass} style={{marginTop : this.state.margin}}>
                         <li id="firstItem"><img src={require('../image/Bitcoin.svg')} /></li>
-                        <li><img src={require('../image/credits.png')} /></li>
-                        <li><img src={require('../image/Litecoin.svg')} /></li>
-                        <li><img src={require('../image/ether.svg')} /></li>
-                        <li><img src={require('../image/Bitcoin.svg')} /></li>
-                        <li><img src={require('../image/xrp.svg')} /></li>
+                        <li className="symbol1"><img src={require('../image/credits.png')} /></li>
+                        <li className="symbol2"><img src={require('../image/Litecoin.svg')} /></li>
+                        <li className="symbol3"><img src={require('../image/ether.svg')} /></li>
+                        <li className="symbol4"><img src={require('../image/Bitcoin.svg')} /></li>
+                        <li className="symbol5"><img src={require('../image/xrp.svg')} /></li>
                         <li><img src={require('../image/Bitcoin.svg')} /></li>
                         <li><img src={require('../image/credits.png')} /></li>
                     </ul>

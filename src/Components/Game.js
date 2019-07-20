@@ -16,13 +16,9 @@ class Game extends React.Component {
 
   constructor(props) {
     super(props);
-
+    this._reels = [];
     this.state = {
-      reel1: 1,
-      reel2: 4,
-      reel3: 2,  
-      reel4: 2, 
-      reel5: 2,
+      reels: Array(parseInt(props.reels)).fill(0),
       lastWin: 0,
       balance: 0,
       bet: 1,
@@ -52,11 +48,12 @@ class Game extends React.Component {
   }
 
   spinReels() {
-    this._child1.spin();
-    this._child2.spin();
-    this._child3.spin();  
-    this._child4.spin();  
-    this._child5.spin();
+    console.log(this.props.reels)
+    Array.apply(0, Array(parseInt(this.props.reels))).map(function (x, index) {
+      console.log(index)
+      this[`spinner${index}`].spin();
+      console.log('what');
+    }.bind(this));
 
     this.setState(
       {
@@ -68,21 +65,17 @@ class Game extends React.Component {
   result(r) {
     const result = JSON.parse(r.smart_contract_result.v_string);
     console.log(result);
+
     this.setState({
-      reel1: result.result.Reels[0],
-      reel2: result.result.Reels[1],
-      reel3: result.result.Reels[2],
-      reel4: result.result.Reels[3],
-      reel5: result.result.Reels[4],
+      reels: result.result.Reels,
       lastWin: result.result.win,
       balance: 0.00
     })
     
-    this._child1.stop();
-    this._child2.stop();
-    this._child3.stop();
-    this._child4.stop();
-    this._child5.stop();
+    Array.apply(0, Array(parseInt(this.props.reels))).map(function (x, index) {
+      this[`spinner${index}`].stop();
+    }.bind(this));
+
     this.getBalance();
 
     if(result.result.resultIsSuccess){
@@ -127,11 +120,11 @@ class Game extends React.Component {
             <div className={styles.arrowLeft}></div>
             <div className={this.state.winnerClassName}></div>
             <div className={styles.spinnercontainer}>
-              <Spinner item={this.state.reel1} ref={(child) => { this._child1 = child; }} timer="100" />
-              <Spinner item={this.state.reel2} ref={(child) => { this._child2 = child; }} timer="200" />
-              <Spinner item={this.state.reel3} ref={(child) => { this._child3 = child; }} timer="350" />
-              <Spinner item={this.state.reel4} ref={(child) => { this._child4 = child; }} timer="400" />
-              <Spinner item={this.state.reel5} ref={(child) => { this._child5 = child; }} timer="600" />
+            {this.state.reels.map((val, index) =>
+              <Spinner item={val} 
+              ref={(child) => { this[`spinner${index}`] = child; }}
+              timer="100" />
+            )}
             </div>
 
           </div>
@@ -148,7 +141,14 @@ class Game extends React.Component {
             </div>
           </div>
           <div className={styles.LOGO}><h1>CS<em>SLOTS</em></h1></div>
-          <div className={styles.SPIN}><SendTransaction bet={this.state.bet} onPlaceBet={this.spinReels.bind(this)} callback={this.result.bind(this)} /></div>
+          <div className={styles.SPIN}>
+            <SendTransaction 
+            reels={this.props.reels}
+            symbols={this.props.symbols}
+            bet={this.state.bet} 
+            onPlaceBet={this.spinReels.bind(this)} 
+            callback={this.result.bind(this)} />
+          </div>
           <div className={styles.Bet}>
           <div className={styles.topWrap}>
               <h2>Bet</h2>

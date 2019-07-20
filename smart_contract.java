@@ -16,17 +16,10 @@ public class DwSlots extends SmartContract {
     private Map<String, String> result = new HashMap<>();
     private String owner;
     private double transactionFee = 0.01;
-    private int numReels = 5;
-    private int numSymbols = 5;
 
     public DwSlots() {
         super();
         owner = initiator;
-    }
-
-    private int generateRandomNumber(byte[] seed) {
-        Random random = new Random((long) Arrays.hashCode(seed));
-        return random.nextInt(numReels);
     }
 
     private void checkPermission() throws DwSlotsException {
@@ -34,73 +27,141 @@ public class DwSlots extends SmartContract {
             throw new DwSlotsException("403 Permission denied");
         }
     }
-
-    private double calculatePrize(List<Integer> Reels) {
+    
+    private int generateRandomNumber(byte[] seed, int numSymbols) {
+        Random random = new Random();
+        return random.nextInt(numSymbols);
+    }
+    
+    
+    @Getter
+    public List<Double> getTopPrizes(int numSymbols, int numReels) {
+    	List<Double> Prizes = new ArrayList<>();
+    	double tierFund = getTotalOdds(numSymbols, numReels) * 0.7;
     	
-    	double totalOdds = Math.pow(numSymbols, numReels);
-    	int i = numReels;
+    	int numMatched = 0;
+    	do {
+    		double chances = Math.pow(numSymbols, numReels - ( numMatched + 1) );
+    		double prize = (tierFund / Math.pow(2, (numReels - numMatched) )) / chances;
+    		
+    		Prizes.add(prize);
+    		numMatched++;;
+    	} while (numMatched < numReels);
+    	
+    	return Prizes;
+    }
+    
+    @Getter
+    public List<Double> getSecondTierPrizes(int numSymbols, int numReels) {
+    	List<Double> Prizes = new ArrayList<>();
+    	double tierFund = getTotalOdds(numSymbols, numReels) * 0.3;
+    	
+    	int numMatched = 2;
+    	Prizes.add(0.00);
+    	Prizes.add(0.00);
+    	do {
+    		double chances = Math.pow(numSymbols, numReels - ( numMatched + 1) )  * (numSymbols-1);
+    		double prize = (tierFund / Math.pow(2, (numReels - numMatched) )) / chances;
+    		Prizes.add(prize);
+    		numMatched++;;
+    	} while (numMatched < numReels);
+    	
+    	return Prizes;
+    }
+    
+    private double getTotalOdds(int numSymbols, int numReels) {
+    	return Math.pow(numSymbols, numReels);
+    }
+    
+    private double calculatePrize(List<Integer> Reels, int numSymbols, int numReels) {    	
+    	int i = 0;
     	double prize = 0;
     	
     	
     	//Loop Through second tier prizes;
-        	double tier1fund = totalOdds * 0.3;
-        	i = numReels;
-    		do {
-    			if(Reels.get((numReels - i) ).intValue() == Reels.get((numReels - i) + 1).intValue()) {
-        			double chances = Math.pow(numSymbols, (i - 2) ) * (numSymbols-1);
-        			prize = (tier1fund / Math.pow(2, (i-1))) / chances;	
-    			}else {
-    				break;
-    			}
-
-    			i--;
-    		} while (i >= 2);
-    	
-    	//Loop Through top tier prizes
-    	double tier0fund = totalOdds * 0.7;
-    	i = numReels;
+    	i = 1;
 		do {
-			if(Reels.get((numReels - i)).intValue() == 0) {
-				double chances = Math.pow(numSymbols, (i-1));
-				prize = (tier0fund / Math.pow(2, i)) / chances;
+			if(Reels.get(i).intValue() == Reels.get(i - i).intValue()) {
+				prize = getSecondTierPrizes(numSymbols,numReels).get(i);
 			}else {
 				break;
 			}
-			i--;
-		} while (i >= 1);
+
+			i++;
+		} while (i < numReels);
+    	
+    	//Loop Through top tier prizes
+    	i = 0;
+		do {
+			if(Reels.get(i).intValue() == 0) {
+				prize = getTopPrizes(numSymbols,numReels).get(i);
+			}else {
+				break;
+			}
+			i++;
+		} while (i < numReels);
 		
     	//
     	return prize;
     }
-
-    /**
-     * payable
-     * 
-     * @param amount - bet amount
-     * @return result in JSON format, example:
-     *         {"code":0,"errorMessage":"","result":{"resultIsSuccess":true,"Reels":[1,2,1],"win":0.0}}
-     */
+    
     public String payable(BigDecimal amount, byte[] userData) {
 
+    	/*
+    	 * Check Bet levels are valid
+    	 */
+        double betAmount = amount.doubleValue();
+        if (betAmount == 0) {
+            return new Response(1, "amount is 0", null).toJson();
+        }
+        if (betAmount > 5) {
+            return new Response(1, "max bet is 5", null).toJson();
+        }
+        
+        
+        /*
+         * PARSE USER DATA
+         */
         String userDataStr = new String(userData, StandardCharsets.UTF_8);
         Response response;
         JsonParser jsonParser = new JsonParser();
         JsonObject jObject = jsonParser.parse(userDataStr).getAsJsonObject();
         int gameHash = jObject.get("gameHash").getAsInt();
+        int numSymbols = jObject.get("numSymbols").getAsInt();
+        int numReels = jObject.get("numReels").getAsInt();
 
+        /*
+         * Check the number of reals & symbols aren't zero
+         */
+        if (numSymbols == 0) {
+            return new Response(1, "numSymbols is 0", null).toJson();
+        }
+        if (numReels == 0) {
+            return new Response(1, "numReels is 0", null).toJson();
+        } 
+        
+        
+        /*
+         * Create some reels
+         */
         List<Integer> Reels = new ArrayList<>();
         byte[] seed = getSeed();
 
-        int i = numReels;
+        
+        int i = 1;
         do {
-        	Reels.add(generateRandomNumber(ArrayUtils.addAll(seed, GeneralConverter.toByteArray(i))));
+        	Reels.add(generateRandomNumber(ArrayUtils.addAll(seed, GeneralConverter.toByteArray(i)),numSymbols));
+            i++;
         } while (i <= numReels);
 
+        /*
+         * Calculate Prize
+         */
         boolean resultIsSuccess;
-        double multiplier = calculatePrize(Reels);
+        double multiplier = calculatePrize(Reels,numSymbols,numReels);
 
         double win = 0;
-
+        
         if (multiplier > 0) {
             sendTransaction(contractAddress, initiator, win, transactionFee);
             resultIsSuccess = true;
@@ -117,9 +178,10 @@ public class DwSlots extends SmartContract {
     }
 
     @Getter
-    public double getContractBalance() throws DwSlotsException {
-        checkPermission();
-        return getBalance(contractAddress).doubleValue();
+    public double getProgressiveJackpot() throws DwSlotsException {
+    	double progressive = getBalance(contractAddress).doubleValue();
+    	if(progressive < 0) progressive = 0;
+    	return progressive;
     }
 
     public void setTransactionFee(double transactionFee) throws DwSlotsException {
@@ -127,6 +189,11 @@ public class DwSlots extends SmartContract {
         this.transactionFee = transactionFee;
     }
 
+    public void transferAmountToOwner(double amount) throws DwSlotsException {
+        checkPermission();
+        sendTransaction(contractAddress, owner, amount, transactionFee);
+    }
+    
     @Getter
     public double getTransactionFee() {
         return this.transactionFee;
