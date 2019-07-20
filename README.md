@@ -23,6 +23,7 @@ A fully working version of Credits Slots in available here. [Play Now][1]
 * No need Cesar for browser extensions
 * Serverless (can be ran offline)
 * Can change the node end point
+* Retains a working Balance
 
 ## Make Your Own Slot
 
