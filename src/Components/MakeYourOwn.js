@@ -101,7 +101,7 @@ class MakeYourOwn extends React.Component {
 
         return (
             <>
-                <div className={styles.MakeYourOwnButton} onClick={this.openMakeYourOwn.bind(this)}><span>Make Your Own Slot</span></div>
+                <div className={styles.MakeYourOwnButton} onClick={this.openMakeYourOwn.bind(this)}><span>MakeYourOwn Slot</span></div>
                 <div className={MakeYourOwnStyles.join(' ')}>
 
                 <Container component="main" maxWidth="xl">

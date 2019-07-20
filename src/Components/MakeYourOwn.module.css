@@ -4,12 +4,14 @@
     font-family: Exo, cursive;
     font-style: normal;
     font-weight: normal;
-    font-size: 2vw;
-    line-height: 1.5em;
+    font-size: 2vh;
+    line-height: 1em;
     letter-spacing: 0.17em;
     color: #fff;
     position: relative;
     cursor: pointer;
+    text-align: center;
+    display: block;
 }
 
 .MakeYourOwnButton{   

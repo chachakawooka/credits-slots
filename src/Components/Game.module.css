@@ -80,16 +80,17 @@ h2{
   font-family: Exo;
   font-style: normal;
   font-weight: normal;
-  font-size: 2em;
+  font-size: 2vh;
   color: #F7931A;
   margin:0px;
 }
 
+
 h3{
-  font-family: 'Knewave', cursive;
+  font-family: 'Exo', cursive;
   font-style: normal;
   font-weight: normal;
-  font-size: 1.5em;
+  font-size: 2.5vh;
   margin:0px;
   
   color: #FFFFFF;
@@ -100,7 +101,7 @@ h3{
 }
 
 h1 {
-  font-family: 'Knewave', cursive;
+  font-family: 'Exo', cursive;
   font-size: 7vh;
   color: #fff;
   position: absolute;
@@ -124,15 +125,6 @@ h1 em{
   font-family: 'Exo', cursive;
   transform: rotate(12deg);
   color: #F7931A;
-}
-
-@media only screen and (min-width: 500px) {
-  h1{
-    font-size: 8vh;
-  }
-  h1 em{
-    font-size: 5vh;
-  }
 }
 
 .arrowRight {
@@ -203,4 +195,17 @@ h1 em{
 }
 @keyframes scaleForeground {
   50% { transform: scale(0.5); }
+}
+
+
+@media only screen and (min-width: 500px) {
+  h1{
+    font-size: 8vh;
+  }
+  h1 em{
+    font-size: 5vh;
+  }
+  h2{
+    font-size:2vh;
+  }
 }
