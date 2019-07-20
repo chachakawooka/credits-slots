@@ -201,7 +201,7 @@ public class DwSlots extends SmartContract {
     public double getProgressiveJackpot() {
     	double balance = getBalance(contractAddress).doubleValue();
     	if(balance < 10) return 0;
-    	if(balance > 10000) return balance - 10000; //we try to 10k aside at all times
+    	if(balance > 11000) return balance - 10000; //we try to 10k aside at all times
     	return balance / 10; //on is 10% instead
     }
 
