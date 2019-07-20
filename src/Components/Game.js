@@ -111,6 +111,16 @@ class Game extends React.Component {
   render() {
     
     let reels = Array(parseInt(this.props.reels)).fill(0);
+    
+    if(this.state.reels){
+      if(this.props.reels != this.state.reels.length) this.setState({reels: reels});
+      reels = this.state.reels;
+    }
+    
+    let spinColStyle = {
+      "grid-template-columns": Array(this.props.reels).fill('1fr').join(' ')
+    }
+
     return (
       <>
 
@@ -119,7 +129,7 @@ class Game extends React.Component {
             <div className={styles.arrowRight}></div>
             <div className={styles.arrowLeft}></div>
             <div className={this.state.winnerClassName}></div>
-            <div className={styles.spinnercontainer}>
+            <div className={styles.spinnercontainer}  style={spinColStyle}>
             {reels.map((val, index) =>
               <Spinner item={val} 
               ref={(child) => { this[`spinner${index}`] = child; }}
@@ -140,7 +150,7 @@ class Game extends React.Component {
               <h3>{this.state.lastWin} CS</h3>
             </div>
           </div>
-          <div className={styles.LOGO}><h1>CS<em>SLOTS</em></h1></div>
+          <div className={styles.LOGO}><h1>{this.props.name}<em>SLOTS</em></h1></div>
           <div className={styles.PayTable}><PayTable
                       reels={this.props.reels}
                       symbols={this.props.symbols}

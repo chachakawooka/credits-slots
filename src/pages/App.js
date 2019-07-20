@@ -82,7 +82,7 @@ class App extends React.Component {
       if(lookup && lookup[1] && lookup[1].numReels){
         return (  
           <>
-            <Game reels={lookup[1].numReels} symbols={lookup[1].symbols.split("\n")} gameMaker={lookup[1].maker} changeGame={this.changeGame.bind(this)} />        
+            <Game reels={lookup[1].numReels} name={lookup[1].name} symbols={lookup[1].symbols.split("\n")} gameMaker={lookup[1].maker} changeGame={this.changeGame.bind(this)} />        
             <GamePicker games={this.state.games} changeGame={this.changeGame.bind(this)} />
           </>
         )
@@ -93,7 +93,7 @@ class App extends React.Component {
 
     return (
       <>
-        <Game reels={config.reels} symbols={config.symbols} gameMaker={config.gameMaker} changeGame={this.changeGame.bind(this)} />
+        <Game reels={config.reels} name="Credits" symbols={config.symbols} gameMaker={config.gameMaker} changeGame={this.changeGame.bind(this)} />
         <GamePicker games={this.state.games} changeGame={this.changeGame.bind(this)} /> 
       </>
     );
