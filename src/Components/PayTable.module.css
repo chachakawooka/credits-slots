@@ -60,12 +60,12 @@
   .JACKPOTSYMBOL dt, .OTHERSYMBOLS dt{
     font-family: 'Exo', cursive;
     color: #F7931A;
-    font-size: 4vw;
+    font-size: 1.5em;
   }
 
 
   .JACKPOTSYMBOL dd, .OTHERSYMBOLS dd{
     font-family: 'Exo', cursive;
     color: #fff;
-    font-size: 3vw;
+    font-size: 1em  ;
   }
