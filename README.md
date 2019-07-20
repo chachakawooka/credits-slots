@@ -1,68 +1,45 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# About this game
 
-## Available Scripts
+Credits slots works on the Credits (CS) blockchain.
 
-In the project directory, you can run:
+## Play Now
 
-### `npm start`
+A fully working version of Credits Slots in available here. [Play Now][1]
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Features
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+* Default Credits Slot
+* Bet Changing
+* Balance view
+* Last win view
+* Dynamic Pay Tables
+    * 2 Tiers of prizes
+    * Progressive Jackpot
+* Make Your Own Slot
+    * Configurable number of reels
+    * Configurable Symbols
+    * Slot maker recieves portion of Progressive Jackpot
+    * Dynamically produced pay table reflective of chances
+* No need Cesar for browser extensions
+* Serverless (can be ran offline)
+* Can change the node end point
 
-### `npm test`
+## Make Your Own Slot
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Once logged in each user can create their own slot for the price of 1CS
 
-### `npm run build`
+Any images can be referenced and used as symbols as long as its hosted on a secure domain.
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The Pay Table will automatically modify itself to be reflective of the number of variations created based on Math.pow(numSymbols, numReels)
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+## About the Progressive Jackpot
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The progressive Jackpot is 10% of the contract Balance of (balance-10000).  Whichever is larger
 
-### `npm run eject`
+The progressive Jackpot chance is curved so the chance of winning it becomes more likely the closer to 10000 the jackpot gets.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+The progressive jackpot pays out:
+* 90% of the jackpot to the player
+* 10% of the jackpot to the creator of the slot
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+[1]: https://chachakawooka.github.io/credits-slots/ "Credits Slot"
