@@ -1,0 +1,71 @@
+.PayTableButton span{
+    width:100%;
+    height: 100%;
+    font-family: Exo, cursive;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 2vw;
+    line-height: 1.5em;
+    letter-spacing: 0.17em;
+    color: #FFFFFF;
+    position: relative;
+    cursor: pointer;
+}
+
+.PayTableButton{   
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+}
+
+.PayTableGrid{
+    position: fixed;
+    height: 100vh;
+    top: 100%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #000;
+    transition: top 0.5s ease-in-out 0.1s;
+    z-index: 1;
+    color:#fff;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 0.4fr 1.6fr 1fr;
+    grid-template-areas: "PROGRESSIVE PROGRESSIVE" "JACKPOT-SYMBOL OTHER-SYMBOLS" "JACKPOT-SYMBOL OTHER-SYMBOLS";
+
+}
+
+.PayTableGridOpen{
+    top:0;
+}
+
+.PayTableGrid img{
+    max-height: 10vh;
+}
+  
+  .PROGRESSIVE { grid-area: PROGRESSIVE;
+    font-family: 'Exo', cursive;
+    color: #F7931A;
+    font-size: 5vh;
+    text-align: center;
+}
+  
+  .JACKPOTSYMBOL { grid-area: JACKPOT-SYMBOL; }
+  
+  .OTHERSYMBOLS { grid-area: OTHER-SYMBOLS; }
+
+  .JACKPOTSYMBOL dt, .OTHERSYMBOLS dt{
+    font-family: 'Exo', cursive;
+    color: #F7931A;
+    font-size: 4vw;
+  }
+
+
+  .JACKPOTSYMBOL dd, .OTHERSYMBOLS dd{
+    font-family: 'Exo', cursive;
+    color: #fff;
+    font-size: 3vw;
+  }

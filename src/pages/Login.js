@@ -128,6 +128,7 @@ class Login extends React.Component {
               </div>
             </div>
           <div className={styles.LOGO}><h1>CS<em>SLOTS</em></h1></div>
+          <div className={styles.PayTable}></div>
           <div className={styles.SPIN}>
           </div>
           <div className={styles.Bet}>
