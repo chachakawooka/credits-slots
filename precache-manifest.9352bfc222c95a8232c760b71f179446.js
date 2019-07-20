@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "3e96f22fc1a9c4bf527ca0a7afc8b776",
+    "revision": "133f557f89331b34271346bf57f52d16",
     "url": "/credits-slots/index.html"
   },
   {
-    "revision": "1b3aa9ada5f6c9011045",
+    "revision": "27e6125f532cf4714f47",
     "url": "/credits-slots/static/css/main.04a717e5.chunk.css"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/credits-slots/static/js/2.ab4e8e76.chunk.js"
   },
   {
-    "revision": "1b3aa9ada5f6c9011045",
-    "url": "/credits-slots/static/js/main.5a847789.chunk.js"
+    "revision": "27e6125f532cf4714f47",
+    "url": "/credits-slots/static/js/main.8d8b2e3e.chunk.js"
   },
   {
     "revision": "a052351442091cc0fd60",
