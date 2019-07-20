@@ -16,7 +16,8 @@ public class DwSlots extends SmartContract {
     private Map<String, String> result = new HashMap<>();
     private String owner;
     private double transactionFee = 0.01;
-
+    private Random randNum;
+    
     public DwSlots() {
         super();
         owner = initiator;
@@ -28,9 +29,8 @@ public class DwSlots extends SmartContract {
         }
     }
     
-    private int generateRandomNumber(byte[] seed, int numSymbols) {
-        Random random = new Random((long) Arrays.hashCode(seed));
-        return random.nextInt(numSymbols);
+    private int generateRandomNumber(int numSymbols) {
+        return randNum.nextInt(numSymbols);
     }
     
     
@@ -106,7 +106,7 @@ public class DwSlots extends SmartContract {
     }
     
     public String payable(BigDecimal amount, byte[] userData) {
-
+    	
     	/*
     	 * Check Bet levels are valid
     	 */
@@ -143,7 +143,7 @@ public class DwSlots extends SmartContract {
         
         byte[] seed = getSeed();
         
-       
+        randNum = new Random((long) Arrays.hashCode(seed));
         
         /*
          * Create some reels
@@ -152,14 +152,14 @@ public class DwSlots extends SmartContract {
  
         int i = 1;
         do {
-        	Reels.add(generateRandomNumber(ArrayUtils.addAll(seed, GeneralConverter.toByteArray(i)),numSymbols));
+        	Reels.add(generateRandomNumber(numSymbols));
             i++;
         } while (i <= numReels);
 
         /*
          * PROGRESSIVE CHANCE
          */
-        int progressiveRandom = generateRandomNumber(seed,10000);
+        int progressiveRandom = generateRandomNumber(10000);
         double progressiveJackpot = getProgressiveJackpot();
         if(progressiveJackpot > 10) {
             double progressiveCurve = progressiveJackpot * progressiveJackpot / 10000;

@@ -1,5 +1,6 @@
 let config = {
-    slotAdress: "8b8A5L8zxpJyWFThm8GPqqWPp9fm1KEUvPsDbaXWykFk",
+    slotAdress: "HMxB2dxizJuonfksbwzwYChX6VaJp9JfUCF3cNduUB3r",
+    makeYourOwnAddress: "AgsCo5c42tc6hEmUHTUMTCxNjNETZXzeyLe6dU3ZJVXQ",
     reels: 5,
     symbols: [
         require('./image/credits.png'),
