@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 
 import Game from '../Components/Game'
 import { Redirect} from 'react-router-dom'
+import config from '../config'
 
 class App extends React.Component {
 
@@ -23,7 +24,7 @@ class App extends React.Component {
     }
     return (
       <>
-        <Game />
+        <Game reels={config.reels} symbols={config.symbols} gameMaker={config.gameMaker} />
       </>
     );
   }

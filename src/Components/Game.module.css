@@ -3,10 +3,15 @@
   height: 100vh;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 0.5fr 1fr 1fr 1fr 0.5fr 0.5fr;
-  grid-template-areas: "Balance LOGO Win" "SLOTS SLOTS SLOTS" "SLOTS SLOTS SLOTS" "SLOTS SLOTS SLOTS" "Add Bet Remove" "SPIN SPIN SPIN";
+  grid-template-areas: "Balance LOGO Win" "SLOTS SLOTS SLOTS" "SLOTS SLOTS SLOTS" "SLOTS SLOTS SLOTS" "Add Bet Remove"  "SPIN SPIN PayTable";
 }
 
 .SLOTS { grid-area: SLOTS; }
+
+.PayTable { grid-area: PayTable;
+  background: #000;
+  position: relative;
+}
 
 .Balance { grid-area: Balance;
   background: #000;
@@ -60,14 +65,14 @@
 
 .spinnercontainer {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr;
   grid-template-areas: ". . .";
   height: 100%;
 }
 
 h2{
-  font-family: Bangers;
+  font-family: Exo;
   font-style: normal;
   font-weight: normal;
   font-size: 2em;
@@ -90,28 +95,39 @@ h3{
 }
 
 h1 {
-  text-align: center;
   font-family: 'Knewave', cursive;
-  font-size: 7vw;
+  font-size: 7vh;
   color: #fff;
   position: absolute;
-  left:30%;
-  top:50%;
-  transform: translate(-50%, -50%)  rotate(-35.29deg);
+  top:10%;
+  left:-7%;
+  transform: rotate(-12deg);
   margin:0;
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: black;
+  line-height: 1em;
+  text-align: center;
+  width: 100%;
 } 
 
 h1 em{
   display: block;
   position: absolute;
-  font-size: 5vw;
-  left:60%;
-  bottom:-50%;
-  font-family: 'Bangers', cursive;
-  transform: rotate(35.29deg);
+  font-size: 5vh;
+  left:50%;
+  bottom:-68%;
+  font-family: 'Exo', cursive;
+  transform: rotate(12deg);
   color: #F7931A;
+}
+
+@media only screen and (min-width: 500px) {
+  h1{
+    font-size: 8vh;
+  }
+  h1 em{
+    font-size: 5vh;
+  }
 }
 
 .arrowRight {
@@ -119,11 +135,11 @@ h1 em{
   height: 0px;
   border-top: 4vw solid transparent;
   border-bottom: 4vw solid transparent;
-  border-left: 10vw solid #CD1919;
+  border-left: 4vw solid #CD1919;
   position: absolute;
   top:50%;
   left: 0;
-  transform: translate(0%, -10vw) 
+  transform: translate(0%, -8vw) 
 }
 
 .arrowLeft {
@@ -131,11 +147,11 @@ h1 em{
   height: 0px;
   border-top: 4vw solid transparent;
   border-bottom: 4vw solid transparent;
-  border-right: 10vw solid #CD1919;
+  border-right: 4vw solid #CD1919;
   position: absolute;
   right: 0;
   top:50%;
-  transform: translate(0%, -10vw) 
+  transform: translate(0%, -8vw) 
 }
 
 
