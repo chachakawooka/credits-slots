@@ -145,7 +145,7 @@ class Game extends React.Component {
             {reels.map((val, index) =>
               <Spinner item={val} 
               ref={(child) => { this[`spinner${index}`] = child; }}
-              timer="100" symbols={this.props.symbols}/>
+              timer={100 + (Math.floor(Math.random() * 6) * 100)} symbols={this.props.symbols}/>
             )}
             </div>
 
