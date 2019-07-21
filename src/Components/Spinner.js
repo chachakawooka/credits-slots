@@ -10,7 +10,9 @@ class Spinner extends React.Component {
         this.state = {
             spinning: false,
             margin: 0,
-            itemHeight:0
+            itemHeight:0,
+            displaySymbols: null,
+            oldSymbols: []
         }
 
         this.spin = this.spin.bind(this);
@@ -29,14 +31,7 @@ class Spinner extends React.Component {
         ,this.props.timer);
     }
 
-    stop(){
-
-        this._symbols = [];
-        {this.props.symbols.map((val, index) =>
-            this._symbols.push(<li key={index}><img src={val} /></li>)
-        )}
-        this._symbols.sort(function(a, b){return 0.5 - Math.random()});
-        
+    stop(){     
         //go to selected reel
         setTimeout(
             this.goToReel.bind(this)
@@ -45,7 +40,7 @@ class Spinner extends React.Component {
 
     goToReel(){
         let goTo=0;
-        {this._symbols.map(function(val, index){
+        {this.state.displaySymbols.map(function(val, index){
             if(val.key == this.props.item) goTo = index
         }.bind(this))}
         const margin = (goTo * this.state.itemheight) * -1;
@@ -71,19 +66,24 @@ class Spinner extends React.Component {
             spinClass = styles.spinning
         }
 
-        if(!this._symbols){
-            this._symbols = [];
+        if(JSON.stringify(this.props.symbols) != JSON.stringify(this.state.oldSymbols)){
+            
+            let symbols = [];
             {this.props.symbols.map((val, index) =>
-                this._symbols.push(<li key={index}><img src={val} /></li>)
+                symbols.push(<li key={index}><img src={val} /></li>)
             )}
-            this._symbols.sort(function(a, b){return 0.5 - Math.random()});
+            symbols.sort(function(a, b){return 0.5 - Math.random()});
+            this.setState({
+                displaySymbols: symbols,
+                oldSymbols: this.props.symbols
+            })
         }
         
         return (
             <div className={styles.col}>
                     <ul className={spinClass} style={{marginTop : this.state.margin}}>
                         <li id="firstItem"><img src={this.props.symbols[Math.floor((Math.random() * this.props.symbols.length))]} /></li>
-                        {this._symbols}
+                        {this.state.displaySymbols}
                         <li id="firstItem"><img src={this.props.symbols[Math.floor((Math.random() * this.props.symbols.length))]} /></li>
                         <li id="firstItem"><img src={this.props.symbols[Math.floor((Math.random() * this.props.symbols.length))]} /></li>
                     </ul>
