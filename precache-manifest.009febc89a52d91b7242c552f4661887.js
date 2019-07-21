@@ -1,19 +1,19 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "dc01290e6739092049efd5f1032d3426",
+    "revision": "9b07dd073bd6fe08f4aa61f8531745cb",
     "url": "/credits-slots/index.html"
   },
   {
-    "revision": "fa998cc845e5db636001",
-    "url": "/credits-slots/static/css/main.8b66e1ba.chunk.css"
+    "revision": "14a2d55bf7ca383acb6a",
+    "url": "/credits-slots/static/css/main.add9e938.chunk.css"
   },
   {
     "revision": "50cb7e0ee75668ff072a",
     "url": "/credits-slots/static/js/2.eef0d59f.chunk.js"
   },
   {
-    "revision": "fa998cc845e5db636001",
-    "url": "/credits-slots/static/js/main.b7e712f7.chunk.js"
+    "revision": "14a2d55bf7ca383acb6a",
+    "url": "/credits-slots/static/js/main.f419dbb7.chunk.js"
   },
   {
     "revision": "a052351442091cc0fd60",
@@ -34,10 +34,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "802c6eacbb13c83b27c39be505228231",
     "url": "/credits-slots/static/media/ether.802c6eac.svg"
-  },
-  {
-    "revision": "a37df03b592330ee28fac6ee011d40f0",
-    "url": "/credits-slots/static/media/winner1.a37df03b.svg"
   },
   {
     "revision": "43bbe7e1d58fe539d0c6cbbffd47a013",
