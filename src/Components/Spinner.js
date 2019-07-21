@@ -30,6 +30,13 @@ class Spinner extends React.Component {
     }
 
     stop(){
+
+        this._symbols = [];
+        {this.props.symbols.map((val, index) =>
+            this._symbols.push(<li key={index}><img src={val} /></li>)
+        )}
+        this._symbols.sort(function(a, b){return 0.5 - Math.random()});
+        
         //go to selected reel
         setTimeout(
             this.goToReel.bind(this)
@@ -37,12 +44,20 @@ class Spinner extends React.Component {
     }
 
     goToReel(){
-        const margin = (this.props.item * this.state.itemheight) * -1;
+        let goTo=0;
+        {this._symbols.map(function(val, index){
+            if(val.key == this.props.item) goTo = index
+        }.bind(this))}
+        const margin = (goTo * this.state.itemheight) * -1;
 
         this.setState({
             margin: margin+'px',
             spinning: false
         })
+    }
+
+    reset(){
+        this._symbols = null;
     }
 
     componentDidMount() {
@@ -56,15 +71,19 @@ class Spinner extends React.Component {
             spinClass = styles.spinning
         }
 
-        let last
-
+        if(!this._symbols){
+            this._symbols = [];
+            {this.props.symbols.map((val, index) =>
+                this._symbols.push(<li key={index}><img src={val} /></li>)
+            )}
+            this._symbols.sort(function(a, b){return 0.5 - Math.random()});
+        }
+        
         return (
             <div className={styles.col}>
                     <ul className={spinClass} style={{marginTop : this.state.margin}}>
                         <li id="firstItem"><img src={this.props.symbols[Math.floor((Math.random() * this.props.symbols.length))]} /></li>
-                        {this.props.symbols.map((val, index) =>
-                            <li className={index + "symbol"}><img src={val} /></li>
-                        )}
+                        {this._symbols}
                         <li id="firstItem"><img src={this.props.symbols[Math.floor((Math.random() * this.props.symbols.length))]} /></li>
                         <li id="firstItem"><img src={this.props.symbols[Math.floor((Math.random() * this.props.symbols.length))]} /></li>
                     </ul>

@@ -115,8 +115,17 @@ class Game extends React.Component {
     if(this.state.reels){
       if(this.props.reels != this.state.reels.length) this.setState({reels: reels});
       reels = this.state.reels;
+      Array.apply(0, Array(parseInt(this.props.reels))).map(function (x, index) {
+        if(this[`spinner${index}`]){
+          this[`spinner${index}`].reset();
+        }
+        
+      }.bind(this));  
     }
     
+    if(this.props.gameMaker != this.state.gameMaker){
+      
+    }
     let spinColStyle = {
       "grid-template-columns": Array(this.props.reels).fill('1fr').join(' ')
     }
