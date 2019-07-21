@@ -59,7 +59,7 @@ class Login extends React.Component {
         return (
 
             <div className={styles.gridcontainer}>
-            <div className={styles.SLOTS}>
+            <div className={styles.notSlots}>
             <div className={loginStyles.loginWrap}>
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
