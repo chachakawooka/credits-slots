@@ -92,7 +92,7 @@ class Game extends React.Component {
     })
     setTimeout(
       this.stopSplash.bind(this)
-    ,6000);
+    ,3000);
   }
 
   stopSplash(){
@@ -128,7 +128,10 @@ class Game extends React.Component {
           <div className={styles.SLOTS}>
             <div className={styles.arrowRight}></div>
             <div className={styles.arrowLeft}></div>
-            <div className={this.state.winnerClassName}></div>
+            <div className={this.state.winnerClassName}>
+              <span> Winner!<br />
+              {this.state.lastWin}CS
+              </span></div>
             <div className={styles.spinnercontainer}  style={spinColStyle}>
             {reels.map((val, index) =>
               <Spinner item={val} 

@@ -187,9 +187,26 @@ h1 em{
   background-size: cover;
   animation:         rotateBackground 12s linear infinite;
 }
+.winner span{
+    top: -25vw;
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    content: '';
+    display: block;
+    z-index: 4;
+    display: block;
+    text-align: center;
+    FONT-SIZE: 5EM;
+    font-weight: 900;
+    TRANSFORM: translate(0%, -50%);
+}
 .winner:after{
-  background : url(../image/winner1.svg) no-repeat center;
   background-size: 50% 50%;
+  background: #f7931ae8;
+  border: 10vh solid #000000;
+  border-radius: 100%;
+  transform: scale(0.3, 0.3);
   animation:         scaleForeground 2s linear infinite;
 }
 
@@ -197,7 +214,7 @@ h1 em{
   100% { transform: rotate(360deg); }
 }
 @keyframes scaleForeground {
-  50% { transform: scale(0.5); }
+  50% { transform: scale(0.6); }
 }
 
 
